@@ -72,7 +72,7 @@ public class Signin extends Fragment {
             public void onClick(View v) {
                 password = edpass.getText().toString().trim();
                 email = edemail.getText().toString().trim();
-                if (true)
+                if (email.length() == 0 || !email.contains("@") || email.length() < email.indexOf("@")+5 || password.length()<8)
                 {
                     if (email.length() == 0 || !email.contains("@") || email.length() < email.indexOf("@")+5)
                     {

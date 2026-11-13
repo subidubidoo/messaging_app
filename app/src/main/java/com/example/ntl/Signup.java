@@ -169,6 +169,18 @@ public class Signup extends Fragment {
         error6 = view.findViewById(R.id.errortx6);
 
         signupbt.setOnClickListener(v -> {
+            tpass2.setTypeface(null, Typeface.NORMAL);
+            tphone.setTypeface(null, Typeface.NORMAL);
+            tdate.setTypeface(null, Typeface.NORMAL);
+            tname.setTypeface(null, Typeface.NORMAL);
+            temail.setTypeface(null, Typeface.NORMAL);
+            tpass1.setTypeface(null, Typeface.NORMAL);
+            temail.setTextColor(Color.parseColor("#FDFDFD"));
+            tpass1.setTextColor(Color.parseColor("#FDFDFD"));
+            tname.setTextColor(Color.parseColor("#FDFDFD"));
+            tdate.setTextColor(Color.parseColor("#FDFDFD"));
+            tphone.setTextColor(Color.parseColor("#FDFDFD"));
+            tpass2.setTextColor(Color.parseColor("#FDFDFD"));
              username = usernametext.getText().toString().trim();
              email = emailtext.getText().toString().trim();
              phone = phonetext.getText().toString().trim();
@@ -176,9 +188,10 @@ public class Signup extends Fragment {
              pass = passwordtext.getText().toString().trim();
              confirmPass = passwordtext2.getText().toString().trim();
 
-           if ( true)
 
-            {   if (username.length() == 0)
+            if(username.length() == 0 || email.length()==0 || !email.contains("@" )|| email.length() <= email.indexOf("@")+5 || phone.length() !=10  ||  dob.length()==0 ||pass.length()<8 ||confirmPass.length() <8 ||  !confirmPass.equals(pass))
+            {
+             if (username.length() == 0)
                  {
                 error1.setVisibility(view.VISIBLE);
                  }
@@ -198,7 +211,7 @@ public class Signup extends Fragment {
                 }
 
 
-                if (phone.length() <10 )
+                if (phone.length() !=10 )
                 {
                     error3.setVisibility(view.VISIBLE);
                 }
@@ -237,7 +250,7 @@ public class Signup extends Fragment {
                     error6.setVisibility(view.INVISIBLE);
                 }
 
-            }
+           }
            else { requireActivity().getSupportFragmentManager().popBackStack();}
         });
 
