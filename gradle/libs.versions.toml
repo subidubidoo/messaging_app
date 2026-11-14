@@ -11,6 +11,7 @@ gridlayout = "1.1.0"
 annotation = "1.11.0"
 lifecycleLivedataKtx = "2.11.0"
 lifecycleViewmodelKtx = "2.11.0"
+room3Common = "3.0.3"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -24,6 +25,7 @@ gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref =
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+room3-common = { group = "androidx.room3", name = "room3-common", version.ref = "room3Common" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
