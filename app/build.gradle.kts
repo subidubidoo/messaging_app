@@ -33,9 +33,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    kotlinOptions {
-        freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
-    }
+
 }
 
 dependencies {
