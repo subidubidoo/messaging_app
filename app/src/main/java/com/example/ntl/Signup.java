@@ -20,7 +20,7 @@ import java.util.Calendar;
 public class Signup extends Fragment {
 
     EditText usernametext, emailtext, phonetext, dobtext, passwordtext, passwordtext2;
-    Button signupbt;
+    Button signupbt , backbt;
     String username,email,phone,dob,pass,confirmPass;
     TextView temail , tpass1,tpass2,tdate,tname,tphone;
     TextView error1,error2,error3,error4,error5 , error6;
@@ -160,7 +160,7 @@ public class Signup extends Fragment {
         });
 
 
-
+        backbt = view.findViewById(R.id.backbt);
         error1 = view.findViewById(R.id.errortx1);
         error2 = view.findViewById(R.id.errortx2);
         error3 = view.findViewById(R.id.errortx3);
@@ -252,6 +252,12 @@ public class Signup extends Fragment {
 
            }
            else { requireActivity().getSupportFragmentManager().popBackStack();}
+        });
+        backbt.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainerView, new Signin())
+                    .addToBackStack(null)
+                    .commit();
         });
 
     }
