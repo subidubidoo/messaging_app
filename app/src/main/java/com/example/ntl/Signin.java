@@ -1,5 +1,7 @@
 package com.example.ntl;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,13 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.ntl.database.UsersDatabase;
+import com.example.ntl.modules.Users;
+
 public class Signin extends Fragment {
 
 
     TextView t1, t2 , toSignupTv , emailerror , passerror;
     EditText edemail, edpass;
     Button btsignin ;
-    String email , password ;
+    String email , pass ;
 
     public Signin() {
 
@@ -70,9 +75,9 @@ public class Signin extends Fragment {
         btsignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                password = edpass.getText().toString().trim();
+                pass = edpass.getText().toString().trim();
                 email = edemail.getText().toString().trim();
-                if (email.length() == 0 || !email.contains("@") || email.length() < email.indexOf("@")+5 || password.length()<8)
+                if (email.length() == 0 || !email.contains("@") || email.length() < email.indexOf("@")+5 || pass.length()<8)
                 {
                     if (email.length() == 0 || !email.contains("@") || email.length() < email.indexOf("@")+5)
                     {
@@ -80,12 +85,36 @@ public class Signin extends Fragment {
                     }
                     else { emailerror.setVisibility(view.INVISIBLE);}
 
-                    if (password.length()<8)
+                    if (pass.length()<8)
                     {
                         passerror.setVisibility(view.VISIBLE);
                     }
                     else { passerror.setVisibility(view.INVISIBLE);}
                 }
+
+
+                Context appContext = requireContext().getApplicationContext();
+
+                UsersDatabase.databaseExecutor.execute(() -> {
+                    Users user = UsersDatabase.getInstance(appContext).usersDao().getUserByEmailOrName(email);
+                    boolean ok = user != null && user.password.equals(pass);
+
+                    if (!isAdded()) return;
+
+                    requireActivity().runOnUiThread(() -> {
+                        if (ok) {
+                            requireContext().getSharedPreferences("session", Context.MODE_PRIVATE)
+                                    .edit()
+                                    .putInt("userId", user.userId)
+                                    .apply();
+                            startActivity(new Intent(requireContext(), ChatRoom.class));
+                            requireActivity().finish();
+                        } else {
+                            emailerror.setVisibility(View.VISIBLE);
+                            passerror.setVisibility(View.VISIBLE);
+                        }
+                    });
+                });
             }
         });
         toSignupTv.setOnClickListener(v -> {

@@ -5,6 +5,60 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_1"
     tools:context=".ChatRoom">
+
+    <!-- the other person's name -->
+    <TextView
+        android:id="@+id/chatNameTv"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:gravity="center"
+        android:text="Name"
+        android:textColor="#FDFDFD"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- the scrollable list of messages -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/messageInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chatNameTv" />
+
+    <!-- the text box -->
+    <EditText
+        android:id="@+id/messageInput"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded"
+        android:hint="Message"
+        android:inputType="text"
+        android:paddingStart="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="#787878"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sendBt"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- the send button -->
+    <Button
+        android:id="@+id/sendBt"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#F0EED6"
+        android:text="Send"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/messageInput"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,4 +28,7 @@ public interface UsersDao {
 
     @Query("SELECT COUNT(*) FROM users WHERE email = :email OR phoneNumber = :phone")
     int countByEmailOrPhone(String email, String phone);
+
+    @Query("SELECT * FROM Users WHERE email = :input OR userName = :input LIMIT 1")
+    Users getUserByEmailOrName(String input);
 }
