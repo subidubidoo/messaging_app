@@ -22,7 +22,15 @@
             </intent-filter>
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".ChatRoom"
+=======
+            android:name=".Messages"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Homepage"
+>>>>>>> 0ff9771 (fix signup navigation)
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>

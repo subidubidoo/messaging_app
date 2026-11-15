@@ -45,7 +45,11 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.material)
+<<<<<<< HEAD
     implementation(libs.room3.common)
+=======
+    implementation(libs.recyclerview)
+>>>>>>> 0ff9771 (fix signup navigation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)

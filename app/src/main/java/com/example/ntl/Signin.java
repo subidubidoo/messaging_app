@@ -1,6 +1,7 @@
 package com.example.ntl;
-
+import android.content.Intent;
 import android.content.Context;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.ntl.database.UsersDatabase;
 import com.example.ntl.modules.Users;
+
 
 public class Signin extends Fragment {
 
@@ -90,6 +92,7 @@ public class Signin extends Fragment {
                         passerror.setVisibility(view.VISIBLE);
                     }
                     else { passerror.setVisibility(view.INVISIBLE);}
+
                 }
 
 
@@ -117,11 +120,16 @@ public class Signin extends Fragment {
                 });
             }
         });
+
         toSignupTv.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainerView, new Signup())
                     .addToBackStack(null)
                     .commit();
-        });
+                // opens homepage after sucessful login
+                Intent intent = new Intent(requireActivity(), Homepage.class);
+                startActivity(intent);
+                requireActivity().finish();
+           });
     }
 }
