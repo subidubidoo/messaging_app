@@ -23,15 +23,15 @@ foreignKeys = {
 
         },
         indices = {
-                @Index("chatId"),
+                @Index("chatMessageId"),
                 @Index("senderId")
         })
 public class Messages {
     @PrimaryKey(autoGenerate = true)
-    private int messageId =0;
-    private int senderId;
-    String message_text;
-    private Date messageSentDate;
-    private int chatMessageId;
+    public int messageId =0;
+    public int senderId;
+    public String message_text;
+    public long messageSentDate;
+    public int chatMessageId;
 
 }

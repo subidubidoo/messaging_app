@@ -28,11 +28,11 @@ import androidx.room.PrimaryKey;
 )
 public class Chats {
     @PrimaryKey (autoGenerate = true)
-    private int chatId =0;
+    public int chatId =0;
 
-    private int user1Id;
-    private int user2Id;
-    long lastMessageSent;
+    public int user1Id;
+    public int user2Id;
+    public long lastMessageSent;
 
 
 }

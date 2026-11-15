@@ -1,6 +1,7 @@
 package com.example.ntl;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,10 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.ntl.database.UsersDao;
+import com.example.ntl.database.UsersDatabase;
+import com.example.ntl.modules.Users;
 
 import java.util.Calendar;
 
@@ -22,7 +28,7 @@ public class Signup extends Fragment {
     EditText usernametext, emailtext, phonetext, dobtext, passwordtext, passwordtext2;
     Button signupbt , backbt;
     String username,email,phone,dob,pass,confirmPass;
-    TextView temail , tpass1,tpass2,tdate,tname,tphone;
+    TextView temail , tpass1,tpass2,tdate,tname,tphone, accExistsTv;
     TextView error1,error2,error3,error4,error5 , error6;
 
     public Signup() {
@@ -54,6 +60,7 @@ public class Signup extends Fragment {
         tdate = view.findViewById(R.id.t_dob);
         tname= view.findViewById(R.id.t_username);
         tphone   = view.findViewById(R.id.t_phone);
+        accExistsTv = view.findViewById(R.id.accountExists);
 
 
         dobtext.setOnClickListener(v -> {
@@ -189,6 +196,9 @@ public class Signup extends Fragment {
              confirmPass = passwordtext2.getText().toString().trim();
 
 
+
+
+
             if(username.length() == 0 || email.length()==0 || !email.contains("@" )|| email.length() <= email.indexOf("@")+5 || phone.length() !=10  ||  dob.length()==0 ||pass.length()<8 ||confirmPass.length() <8 ||  !confirmPass.equals(pass))
             {
              if (username.length() == 0)
@@ -251,9 +261,43 @@ public class Signup extends Fragment {
                 }
 
            }
-           else { requireActivity().getSupportFragmentManager().popBackStack();}
+
+
+
+
+
+
+            Context appContext = requireContext().getApplicationContext();
+
+            UsersDatabase.databaseExecutor.execute(() -> {
+                Users user = new Users();
+                user.userName = username;
+                user.email = email;
+                user.password = pass;
+                user.phoneNumber = phone;
+
+                long id;
+
+                if (UsersDatabase.getInstance(appContext).usersDao().countByEmailOrPhone(user.email, user.phoneNumber) > 0) {
+                    id = -1;
+                } else {
+                     accExistsTv.setVisibility(View.INVISIBLE);
+                     id = UsersDatabase.getInstance(appContext).usersDao().insertUser(user);
+                }
+
+
+                if (!isAdded()) return;
+
+                requireActivity().runOnUiThread(() -> {
+                    if (id == -1) {
+                        accExistsTv.setVisibility(View.VISIBLE);
+                    } else {
+                        requireActivity().getSupportFragmentManager().popBackStack();
+                    }
+                });
+            });
         });
-        backbt.setOnClickListener(v -> {
+        backbt.setOnClickListener(k -> {
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainerView, new Signin())
                     .addToBackStack(null)

@@ -3,6 +3,7 @@ package com.example.ntl.database;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
+import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Upsert;
 
@@ -13,8 +14,8 @@ import java.util.List;
 @Dao
 public interface UsersDao {
 
-    @Upsert
-    void upsertUser(Users user);
+    @Insert
+    long insertUser(Users user);
 
     @Delete
     void deleteUser(Users user);
@@ -24,4 +25,7 @@ public interface UsersDao {
             "OR phoneNumber LIKE '%' || :search || '%' " +
             "ORDER BY userName ASC")
     LiveData<List<Users>> searchUsers(String search);
+
+    @Query("SELECT COUNT(*) FROM users WHERE email = :email OR phoneNumber = :phone")
+    int countByEmailOrPhone(String email, String phone);
 }

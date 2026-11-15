@@ -1,8 +1,8 @@
 package com.example.ntl.modules;
 
-import androidx.room.ForeignKey;
-import androidx.room3.PrimaryKey;
-import java.sql.Date;
+
+import androidx.room.PrimaryKey;
+
 import androidx.room.Entity;
 
 
@@ -14,9 +14,9 @@ public class Users {
     public int userId;
     public String userName;
     public String phoneNumber;
-    private String email;
-    private String password;
-    private Date dateOfBirth;
+    public String email;
+    public String password;
+
 
 
     public int getUserId() {
@@ -37,10 +37,7 @@ public class Users {
 
     public String getPassword() {
         return password;
-    }
+    }}
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-}
+
 
