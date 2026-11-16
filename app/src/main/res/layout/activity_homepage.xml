@@ -91,7 +91,6 @@
         app:srcCompat="@drawable/user_profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
-    <!-- Home button -->
 
     <!-- Groups Button -->
 
