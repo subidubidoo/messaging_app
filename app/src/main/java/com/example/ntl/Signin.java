@@ -106,11 +106,9 @@ public class Signin extends Fragment {
 
                     requireActivity().runOnUiThread(() -> {
                         if (ok) {
-                            requireContext().getSharedPreferences("session", Context.MODE_PRIVATE)
-                                    .edit()
-                                    .putInt("userId", user.userId)
-                                    .apply();
-                            startActivity(new Intent(requireContext(), ChatRoom.class));
+                            // opens homepage after sucessful login
+                            Intent intent = new Intent(requireActivity(), Homepage.class);
+                            startActivity(intent);
                             requireActivity().finish();
                         } else {
                             emailerror.setVisibility(View.VISIBLE);
@@ -126,10 +124,7 @@ public class Signin extends Fragment {
                     .replace(R.id.fragmentContainerView, new Signup())
                     .addToBackStack(null)
                     .commit();
-                // opens homepage after sucessful login
-                Intent intent = new Intent(requireActivity(), Homepage.class);
-                startActivity(intent);
-                requireActivity().finish();
+
            });
     }
 }

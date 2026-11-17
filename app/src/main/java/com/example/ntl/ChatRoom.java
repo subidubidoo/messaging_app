@@ -20,13 +20,13 @@ import com.example.ntl.modules.Messages;
 
 public class ChatRoom extends AppCompatActivity {
 
-    private UsersDatabase db;
-    private MessageAdapter adapter;
-    private RecyclerView messagesRv;
-    private EditText messageInput;
+     UsersDatabase db;
+     MessageAdapter adapter;
+     RecyclerView messagesRv;
+     EditText messageInput;
 
-    private int currentUserId;
-    private int chatId = -1;   // stays -1 until the chat is ready
+     int currentUserId;
+     int chatId = -1;   // stays -1 until the chat is ready
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

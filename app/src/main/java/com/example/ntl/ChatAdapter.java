@@ -26,19 +26,25 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_message, parent, false);
 
+
         return new ChatViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
 
-        ChatMessage message = messages.get(position);
-
-        holder.name.setText(message.getName());
-        holder.message.setText(message.getMessage());
-        holder.date.setText(message.getDate());
-        holder.image.setImageResource(message.getImage());
     }
+
+//    @Override
+//    public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
+//
+//        ChatMessage message = messages.get(position);
+//
+//        holder.name.setText(message.getName());
+//        holder.message.setText(message.getMessage());
+//        holder.date.setText(message.getDate());
+//        holder.image.setImageResource(message.getImage());
+//    }
 
     @Override
     public int getItemCount() {
